@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liberty Electronics — Cart</title>
+
+<!-- BOOTSTRAP -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<style>
+body{ font-family:'Inter', sans-serif; background:#050510; color:#fff; scroll-behavior:smooth; padding-top:80px; }
+body::before, body::after{ content:''; position:fixed; width:450px; height:450px; filter:blur(90px); z-index:-1; }
+body::before{ left:5%; top:8%; background:radial-gradient(circle, rgba(0,200,255,0.35), transparent 70%);} 
+body::after{ right:5%; bottom:8%; background:radial-gradient(circle, rgba(180,0,255,0.35), transparent 70%);} 
+
+.navbar{ background:rgba(10,10,20,0.7); backdrop-filter:blur(15px); border-bottom:1px solid rgba(255,255,255,0.1); position:fixed; top:0; width:100%; z-index:9999; }
+.logo-wrap{ display:inline-grid; place-items:center; width:52px; height:52px; border-radius:50%; }
+.logo-core{ width:46px; height:46px; border-radius:50%; border:3px solid #00eaff; border-top-color:#b400ff; display:flex; align-items:center; justify-content:center; animation: spin 3s linear infinite; background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); }
+@keyframes spin{ from{transform:rotate(0)} to{transform:rotate(360deg)} }
+.nav-link{ color:rgba(255,255,255,0.85); transition:0.3s; }
+.nav-link:hover{ color:#00eaff; }
+.nav-link.active{ border-bottom:3px solid #00eaff; font-weight:700; }
+
+.cart-icon{
+  position:relative;
+  color:white;
+  font-size:24px;
+  margin-left:15px;
+  cursor:pointer;
+  text-decoration:none;
+}
+.cart-count{
+  position:absolute;
+  top:-7px;
+  right:-10px;
+  background:#ff0048;
+  padding:3px 7px;
+  border-radius:50%;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.cart-container{ padding:40px 0; }
+.cart-item{ background:rgba(255,255,255,0.05); padding:20px; border-radius:15px; margin-bottom:20px; display:flex; align-items:center; justify-content:space-between; border:1px solid rgba(255,255,255,0.1); transition:0.3s; }
+.cart-item:hover{ transform:translateY(-5px); box-shadow:0 0 20px #00eaff50; }
+.cart-item img{ width:80px; border-radius:10px; }
+.cart-item-info{ flex:1; margin-left:20px; }
+.cart-item-info h5{ margin:0 0 5px; }
+.cart-item-info p{ margin:0; color:#ccc; }
+.cart-item-actions button{ border:none; background:#b400ff; color:#fff; padding:8px 15px; border-radius:50px; cursor:pointer; transition:0.3s; }
+.cart-item-actions button:hover{ background:#00eaff; color:#050510; }
+
+.footer-custom{ background:#0b1326; color:#fff; padding:60px 20px; border-top:2px solid #00eaff; }
+.footer-custom a{text-decoration:none; color:#ccc; transition:0.3s; }
+.footer-custom a:hover{color:#00eaff;}
+.footer-social i{ transition:0.3s; }
+.footer-social i:hover{ color:#00eaff; transform:scale(1.2); }
+.footer-section{ margin-bottom:30px; }
+.footer-section h5{ font-weight:700; margin-bottom:15px; }
+.footer-newsletter input{ border-radius:50px; padding:10px 15px; margin-right:10px; border:none; }
+.footer-newsletter button{ border-radius:50px; padding:10px 20px; border:none; background:#00eaff; color:#050510; font-weight:bold; }
+.footer-newsletter button:hover{ background:#b400ff; color:#fff; }
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark py-3">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+      <div class="logo-wrap">
+        <div class="logo-core"><i class="bi bi-lightning-charge-fill" style="font-size:22px;color:rgba(255,255,255,0.9)"></i></div>
+      </div>
+      <span class="fw-bold fs-4">Liberty Electronics</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto gap-lg-3 align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="testimonials.html">Testimonials</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+      <div class="d-flex align-items-center ms-3">
+        <a href="cart.html" class="cart-icon ms-3">
+          <i class="bi bi-cart3"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- CART CONTENT -->
+<section class="cart-container container">
+  <h2 class="mb-5 text-center">Your Shopping Cart</h2>
+
+  <div id="cartItems">
+    <!-- Example Cart Item -->
+    <div class="cart-item">
+      <img src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1700517566-716Agdq-YPL.jpg?crop=1xw:1.00xh;center,top&resize=980:*" alt="Laptop">
+      <div class="cart-item-info">
+        <h5>Laptop</h5>
+      </div>
+      <div class="cart-item-actions">
+        <button class="removeBtn">Remove</button>
+      </div>
+    </div>
+
+    <div class="cart-item">
+      <img src="https://www.ion.com.pk/wp-content/uploads/Clipboard_07-23-2024_11.jpg" alt="Headphones">
+      <div class="cart-item-info">
+        <h5>Headphones</h5>
+      </div>
+      <div class="cart-item-actions">
+        <button class="removeBtn">Remove</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-end mt-4">
+    <button class="btn btn-success btn-lg mt-2">Proceed to Checkout</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+ 
+<footer class="footer-custom">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Quick Links</h5>
+        <a href="index.html">Home</a><br>
+        <a href="products.html">Products</a><br>
+        <a href="gallery.html">Gallery</a><br>
+        <a href="about.html">About</a><br>
+        <a href="testimonials.html">Testimonials</a><br>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Support</h5>
+        <a href="#">Privacy Policy</a><br>
+        <a href="#">Terms of Service</a><br>
+        <a href="#">FAQs</a><br>
+        <a href="#">Careers</a><br>
+        <a href="#">Help Center</a>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Contact Info</h5>
+        <p>Email: support@libertyelectronics.com</p>
+        <p>Phone: +92 300 1234567</p>
+        <p>Address: 123 AI Street, Karachi, Pakistan</p>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Newsletter</h5>
+        <div class="footer-newsletter d-flex mb-2">
+          <input type="email" placeholder="Enter your email">
+          <button>Subscribe</button>
+        </div>
+        <div class="footer-social d-flex gap-3">
+          <a href="#" onclick="Swal.fire('Follow us on Facebook!')"><i class="bi bi-facebook fs-5"></i></a>
+          <a href="#" onclick="Swal.fire('Follow us on Instagram!')"><i class="bi bi-instagram fs-5"></i></a>
+          <a href="#" onclick="Swal.fire('Follow us on Twitter!')"><i class="bi bi-twitter fs-5"></i></a>
+          <a href="#" onclick="Swal.fire('Follow us on LinkedIn!')"><i class="bi bi-linkedin fs-5"></i></a>
+          <a href="#" onclick="Swal.fire('Follow us on YouTube!')"><i class="bi bi-youtube fs-5"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <p class="mb-0 text-white-50">© 2025 Liberty Electronics. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // Load cart items from localStorage
+let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+const cartItemsContainer = document.getElementById("cartItems");
+cartItemsContainer.innerHTML = ""; // clear container
+
+if(cart.length === 0){
+  cartItemsContainer.innerHTML = `<p class="text-center text-white-50">Your cart is empty.</p>`;
+} else {
+  cart.forEach((p, index) => {
+    const div = document.createElement("div");
+    div.classList.add("cart-item");
+    div.innerHTML = `
+      <img src="${p.img}" alt="${p.name}">
+      <div class="cart-item-info">
+        <h5>${p.name}</h5>
+        <p>${p.desc}</p>
+      </div>
+      <div class="cart-item-actions">
+        <button data-index="${index}" class="removeBtn">Remove</button>
+      </div>
+    `;
+    cartItemsContainer.appendChild(div);
+  });
+}
+
+// Remove item
+document.querySelectorAll(".removeBtn").forEach(btn => {
+  btn.addEventListener("click", function(){
+    const index = this.getAttribute("data-index");
+    cart.splice(index,1);
+    localStorage.setItem("cartItems", JSON.stringify(cart));
+    location.reload(); // reload to refresh cart
+  });
+});
+
+// Update cart count in navbar
+document.getElementById("cartCount").innerText = cart.length;
+
+// FOOTER SUBSCRIBE
+document.querySelector(".footer-newsletter button").addEventListener("click", function(){
+  const email = this.previousElementSibling.value;
+  if(email){
+    Swal.fire({ icon:"success", title:"Subscribed!", text:`You subscribed with ${email}`, timer:2000, showConfirmButton:false });
+    this.previousElementSibling.value = "";
+  } else {
+    Swal.fire({ icon:"error", title:"Oops!", text:"Please enter a valid email." });
+  }
+});
+
+</script>
+
+</body>
+</html>
+
+

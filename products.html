@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liberty Electronics — Products</title>
+
+<!-- BOOTSTRAP -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<style>
+body{ font-family:'Inter', sans-serif; background:#050510; color:#fff; scroll-behavior:smooth; padding-top:80px; }
+body::before, body::after{ content:''; position:fixed; width:450px; height:450px; filter:blur(90px); z-index:-1; }
+body::before{ left:5%; top:8%; background:radial-gradient(circle, rgba(0,200,255,0.35), transparent 70%);} 
+body::after{ right:5%; bottom:8%; background:radial-gradient(circle, rgba(180,0,255,0.35), transparent 70%);} 
+
+.navbar{ background:rgba(10,10,20,0.7); backdrop-filter:blur(15px); border-bottom:1px solid rgba(255,255,255,0.1); position:fixed; top:0; width:100%; z-index:9999; }
+.logo-wrap{ display:inline-grid; place-items:center; width:52px; height:52px; border-radius:50%; }
+.logo-core{ width:46px; height:46px; border-radius:50%; border:3px solid #00eaff; border-top-color:#b400ff; display:flex; align-items:center; justify-content:center; animation: spin 3s linear infinite; background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); }
+@keyframes spin{ from{transform:rotate(0)} to{transform:rotate(360deg)} }
+.nav-link{ color:rgba(255,255,255,0.85); transition:0.3s; }
+.nav-link:hover{ color:#00eaff; }
+.nav-link.active{ border-bottom:3px solid #00eaff; font-weight:700; }
+
+/* PRODUCTS */
+.products-section{ padding:100px 20px; max-width:1200px; margin:auto; }
+.products-section h2{ font-size:2.5rem; margin-bottom:50px; text-align:center; color:#00eaff; }
+
+.product-card{ background:#0a0f1f; border:1px solid rgba(255,255,255,0.08); border-radius:16px; overflow:hidden; transition:0.3s; box-shadow:0 0 20px #0004; }
+.product-card:hover{ transform:translateY(-5px); border-color:#00eaff; }
+.product-card img{ width:100%; height:250px; object-fit:cover; }
+.product-card-body{ padding:20px; }
+.product-card-body h5{ color:#fff; margin-bottom:10px; }
+.product-card-body p{ color:#ccc; font-size:0.9rem; margin-bottom:15px; }
+.product-card-body button{ border:none; border-radius:50px; padding:8px 20px; background:#00eaff; color:#050510; font-weight:bold; transition:0.3s; }
+.product-card-body button:hover{ background:#b400ff; color:#fff; }
+
+/* ===== NEW: Hover shadow for description & video cards ===== */
+.hover-shadow-card {
+    background: rgba(10,15,31,0.9);
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 20px #0005;
+    transition: 0.3s ease;
+    width: 100%;
+}
+
+.hover-shadow-card:hover {
+    transform: translateY(-5px);
+    border-color: #00eaff;
+    box-shadow: 10px 0 25px rgba(0,234,255,0.5), 0 10px 20px rgba(0,234,255,0.2);
+}
+
+/* FOOTER */
+.footer-custom{ background:#0b1326; color:#fff; padding:60px 20px; border-top:2px solid #00eaff; }
+.footer-custom a{text-decoration:none; color:#ccc; transition:0.3s; }
+.footer-custom a:hover{color:#00eaff;}
+.footer-social i{ transition:0.3s; }
+.footer-social i:hover{ color:#00eaff; transform:scale(1.2); }
+.footer-section{ margin-bottom:30px; }
+.footer-section h5{ font-weight:700; margin-bottom:15px; }
+.footer-newsletter input{ border-radius:50px; padding:10px 15px; margin-right:10px; border:none; }
+.footer-newsletter button{ border-radius:50px; padding:10px 20px; border:none; background:#00eaff; color:#050510; font-weight:bold; }
+.footer-newsletter button:hover{ background:#b400ff; color:#fff; }
+
+@media(max-width:768px){ .products-section{ padding:50px 20px; } .product-card img{ height:200px; } }
+
+/* ===== HERO SECTION WITH ANIMATED BOXES ===== */
+.hero-final{
+    position: relative;
+    height:550px;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hero-bg{
+    position:absolute;
+    inset:0;
+    background-size:cover;
+    background-position:center;
+    transition:background-image 1s ease-in-out;
+    z-index:-1;
+    filter:brightness(55%);
+}
+.hero-main-text h1{
+    font-size:3rem;
+    font-weight:800;
+}
+.hero-main-text span{ color:#00eaff; }
+.hero-main-text p{ color:#e4e4e4; font-size:1.2rem; margin-top:10px; opacity:0.9; }
+
+/* Boxes */
+.hero-box{ position:absolute; width:260px; padding:18px; background:rgba(9,14,32,0.82); border:1.5px solid rgba(0,234,255,0.55); border-radius:16px; color:white; box-shadow:0 0 25px rgba(0,234,255,0.3); opacity:0; pointer-events:none; }
+.hero-box h3{ color:#00eaff; margin-bottom:5px; font-size:1.1rem; }
+@keyframes dropDown{0%{top:-180px;opacity:0}50%{top:40px;opacity:1}100%{top:-180px;opacity:0}}
+@keyframes slideLeftRight{0%{left:-300px;opacity:0}50%{left:40px;opacity:1}100%{left:-300px;opacity:0}}
+@keyframes slideRightLeft{0%{right:-300px;opacity:0}50%{right:40px;opacity:1}100%{right:-300px;opacity:0}}
+@keyframes slideUp{0%{bottom:-200px;opacity:0}50%{bottom:40px;opacity:1}100%{bottom:-200px;opacity:0}}
+.box-top{top:-180px;left:50%;transform:translateX(-50%);}
+.box-left{top:50%;left:-300px;transform:translateY(-50%);}
+.box-right{top:50%;right:-300px;transform:translateY(-50%);}
+.box-bottom{bottom:-200px;left:50%;transform:translateX(-50%);}
+</style>
+</head>
+<body>
+
+<!-- HERO SECTION WITH ANIMATION -->
+<section class="hero-final">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-main-text">
+        <h1>Welcome to <span>Liberty Electronics</span></h1>
+        <p>Your trusted hub for premium electronics & smart gadgets.</p>
+    </div>
+
+    <div class="hero-box box-top">
+        <h3>About Liberty Electronics</h3>
+        <p>We deliver high-quality electronics with innovation & trust.</p>
+    </div>
+    <div class="hero-box box-left">
+        <h3>Our Services</h3>
+        <p>Repairs • Sales • Smart Devices • Accessories</p>
+    </div>
+    <div class="hero-box box-right">
+        <h3>Why Choose Us?</h3>
+        <p>Reliable • Affordable • Latest Technology</p>
+    </div>
+    <div class="hero-box box-bottom">
+        <h3>Featured Products</h3>
+        <p>Mobiles, Laptops, LED TVs, Gaming Accessories</p>
+    </div>
+</section>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark py-3">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+      <div class="logo-wrap">
+        <div class="logo-core"><i class="bi bi-lightning-charge-fill" style="font-size:22px;color:rgba(255,255,255,0.9)"></i></div>
+      </div>
+      <span class="fw-bold fs-4">Liberty Electronics</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto gap-lg-3 align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">Products</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="products.html">All Products</a></li>
+            <li><a class="dropdown-item" href="cable-assemblies.html">Cable Assemblies</a></li>
+            <li><a class="dropdown-item" href="wiring-harnesses.html">Wiring Harnesses</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="testimonials.html">Testimonials</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- PRODUCT DESCRIPTION + VIDEO -->
+<section class="container mt-5">
+  <div class="row g-4 align-items-stretch">
+    <!-- ===== UPDATED: Added hover-shadow-card class ===== -->
+    <div class="col-md-6 d-flex">
+      <div class="hover-shadow-card">
+        <h2 style="color:#00eaff;">Product Description</h2>
+        <ul style="margin-top:15px; line-height:1.8;">
+          <li> “At Liberty Electronics, we offer a wide range of high-quality electronic products designed to make your daily life easier, smarter, and more reliable. 
+            From powerful chargers and durable cables to LED lights, speakers, tools, and home accessories — every product is selected with care to ensure long-lasting performance and great value.
+          Whether you need essential electronics for your home, office, or personal use, Liberty Electronics 
+          brings you trusted quality, affordable prices, and the latest technology — all in one place.”</li>
+        </ul>
+      </div>
+    </div>
+    <!-- ===== UPDATED: Added hover-shadow-card class ===== -->
+    <div class="col-md-6 d-flex">
+      <div class="hover-shadow-card" style="display:flex; align-items:center;">
+        <video controls style="width:100%; height:250px; object-fit:cover; object-position: center 60%; border-radius:12px;">
+          <source src="https://www.pexels.com/download/video/6754825/" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS SECTION -->
+<section class="products-section">
+  <h2>Our Products</h2>
+  <div class="row g-4">
+
+    <!-- FULL PRODUCT CARDS SAME AS ORIGINAL -->
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://www.apple.com/v/watch/bt/images/meta/apple-watch__ywfuk5wnf1u2_og.png" alt="Smart Watch">
+        <div class="product-card-body">
+          <h5>Smart Watch Pro</h5>
+          <p>Advanced AI-powered smartwatch with health tracking and notifications.</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDX-BL_Xt9zIiV6w3_r9zU2Z3NnBTPL5k1dQ&s" alt="Wireless Earbuds">
+        <div class="product-card-body">
+          <h5>Wireless Earbuds</h5>
+          <p>High-quality earbuds with noise cancellation and crystal clear sound.</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/51RV8YSyJyL.jpg" alt="Smart Home Hub">
+        <div class="product-card-body">
+          <h5>Smart Home Hub</h5>
+          <p>Control your home devices with AI-powered hub and voice commands.</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://www.flyeye.io/wp-content/uploads/2024/01/AI-in-delivery-drones.jpg-1047x628-1-1000x600.jpg" alt="AI Drone">
+        <div class="product-card-body">
+          <h5>AI Drone</h5>
+          <p>Intelligent drone with obstacle detection and auto-navigation.</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjjvn4FRrVrEgGw_OQxwOqtGWwz2nngfn_rw&s" alt="VR Headset">
+        <div class="product-card-body">
+          <h5>VR Headset</h5>
+          <p>Immersive virtual reality headset with AI-enhanced graphics.</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEQPhbuQ4CY5Ui0sXjA2jATH5vwZaZsCDLJw&s" alt="AI Speaker">
+        <div class="product-card-body">
+          <h5>AI Speaker</h5>
+          <p>Smart speaker with voice assistant and personalized AI responses.</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/51pa9KekImL._UF1000,1000_QL80_.jpg" alt="Optical Laser">
+        <div class="product-card-body">
+          <h5>Optical Laser</h5>
+          <p> Provides ultra-precise, high-speed light output for accurate measurements and reliable performance.</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://global.rokid.com/cdn/shop/files/review3.png?v=1750238267" alt="AR Glasses">
+        <div class="product-card-body">
+          <h5> AR Glasses</h5>
+          <p>Shows virtual info in your view for hands-free interaction.</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfsDRgFvaeU0hHf0cx3Hr4igM_SaSSiLUUhA&s" alt="3D Printer">
+        <div class="product-card-body">
+          <h5>3D Printer</h5>
+          <p>Quickly creates physical objects from digital designs with precision.</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://images.prismic.io//intuzwebsite/7a3d7e62-18ff-4502-b6cb-fde0bd23c4d0_image+%286%29.png?w=2400&q=80&auto=format,compress&fm=png8" alt="Home Security Systems ">
+        <div class="product-card-body">
+          <h5>Home Security Systems</h5>
+          <p>Real-time monitoring, facial recognition, and alerts.</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://lifemedusa.com/cdn/shop/files/Red.webp?v=1719929509" alt="Electric Scooter">
+        <div class="product-card-body">
+          <h5>Electric Scooters</h5>
+          <p>Eco-friendly, convenient transportation with smart features.</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdgwzofifZuosCR7QsL2al3WqYfhTUL5zbxA&s" alt="Biometric Security Devices">
+        <div class="product-card-body">
+          <h5>Biometric Security Devices</h5>
+          <p>Secure access to homes, offices, and devices.</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+     <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://images-eu.ssl-images-amazon.com/images/I/611XU9og1iL._AC_UL495_SR435,495_.jpg" alt="  Touchless Trash Can">
+        <div class="product-card-body">
+          <h5>Touchless Bathroom Trash Can</h5>
+          <p>Touchless electric bathroom trash can with Lid for a clean, hands-free experience.</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+     <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/71OxVk24wSL._AC_UF350,350_QL50_.jpg" alt="Microwave Food Cover&Collapsible Silicone Mat">
+        <div class="product-card-body">
+          <h5>Microwave Food Cover&Collapsible Silicone Mat</h5>
+          <p>Keep your meals fresh and mess-free with this collapsible silicone microwave food cove.</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+     <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2024/4/410599969/BO/SG/GO/200324666/portable-air-conditioner-usb-desktop-cooler-humidifier-mini-cooling-fan-500x500.jpg" alt="Portable Air Conditioner Fan">
+        <div class="product-card-body">
+          <h5>Portable Air Conditioner Fan</h5>
+          <p>Provides instant, energy-efficient cooling anywhere, keeping you comfortable on the go.</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://sc02.alicdn.com/kf/H527ec693fa534f9f8fe4b056ad088009C/238045879/H527ec693fa534f9f8fe4b056ad088009C.jpeg" alt="MiraScreen G7">
+        <div class="product-card-body">
+          <h5>MiraScreen G7</h5>
+          <p>Wirelessly mirror your device to TV or projector effortlessly.</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://image-cdn.ubuy.com/process-image?data=eyJsIjoiaHR0cHM6XC9cL2ltYWdlcy1jZG4udWJ1eS5jby5pblwvNjMzM2M0NGU0NmFiMDc2NmY4M2IzYzVkLXV2LWxpZ2h0LXNhbml0aXplci1ib3gtdXYtYy1zdGVyaWxpemVyLmpwZyIsInEiOjQ1LCJ3IjoxNzAsImgiOjE3MCwiZiI6ImpwZWcifQ&format=jpeg" alt="UV Sterilizer Boxes">
+        <div class="product-card-body">
+          <h5>UV Sterilizer Boxes</h5>
+          <p>Quickly kills germs and bacteria on your everyday items, keeping them safe and hygienic.</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/31BkFL6MvXL._SL500_.jpg" alt="Automatic Soap Dispensers">
+        <div class="product-card-body">
+          <h5>Automatic Soap Dispensers</h5>
+          <p>Promotes hygiene with touchless operation, reducing the spread of germs.</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://www.provideocoalition.com/wp-content/uploads/small-BMPCC-RAW-3.jpg" alt="Pocket Cinema">
+        <div class="product-card-body">
+          <h5>Pocket Cinema</h5>
+          <p>Enjoy movies and presentations anywhere with compact projection .</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://img.drz.lazcdn.com/static/pk/p/2731d65dba790648e2c76720587ef4f1.png_720x720q80.png" alt="Bluetooth Car FM Transmitters">
+        <div class="product-card-body">
+          <h5>Bluetooth Car FM Transmitters</h5>
+          <p>Stream music and calls hands-free in your vehicle.</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://www.farmaciasdirect.eu/cdn/shop/files/mobiclinic-manta-electrica-con-mando-160-x-120-cm.webp?v=1725117859" alt="Electric Heated Blankets">
+        <div class="product-card-body">
+          <h5>Electric Heated Blankets</h5>
+          <p>Stay warm and cozy with adjustable temperature control.</p>
+          <button>Buy Now</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer-custom">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Quick Links</h5>
+        <a href="index.html">Home</a><br>
+        <a href="products.html">Products</a><br>
+        <a href="gallery.html">Gallery</a><br>
+        <a href="about.html">About</a><br>
+        <a href="testimonials.html">Testimonials</a><br>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Support</h5>
+        <a href="#">Privacy Policy</a><br>
+        <a href="#">Terms of Service</a><br>
+        <a href="#">FAQs</a><br>
+        <a href="#">Careers</a><br>
+        <a href="#">Help Center</a>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Contact Info</h5>
+        <p>Email: support@libertyelectronics.com</p>
+        <p>Phone: +92 300 1234567</p>
+        <p>Address: 123 AI Street, Karachi, Pakistan</p>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Newsletter</h5>
+        <div class="footer-newsletter d-flex mb-2">
+          <input type="email" placeholder="Enter your email">
+          <button>Subscribe</button>
+        </div>
+        <div class="footer-social d-flex gap-3">
+          <a href="#" onclick="Swal.fire('Follow us on Facebook!')"><i class="bi bi-facebook fs-5"></i></a>
+          <a href="#" onclick="Swal.fire('Follow us on Instagram!')"><i class="bi bi-instagram fs-5"></i></a>
+          <a href="#" onclick="Swal.fire('Follow us on Twitter!')"><i class="bi bi-twitter fs-5"></i></a>
+          <a href="#" onclick="Swal.fire('Follow us on LinkedIn!')"><i class="bi bi-linkedin fs-5"></i></a>
+          <a href="#" onclick="Swal.fire('Follow us on YouTube!')"><i class="bi bi-youtube fs-5"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <p class="mb-0 text-white-50">© 2025 Liberty Electronics. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Newsletter
+document.querySelector(".footer-newsletter button").addEventListener("click", function(){
+  const email = this.previousElementSibling.value;
+  if(email){
+    Swal.fire({ icon:"success", title:"Subscribed!", text:`You subscribed with ${email}`, timer:2000, showConfirmButton:false });
+    this.previousElementSibling.value = "";
+  } else {
+    Swal.fire({ icon:"error", title:"Oops!", text:"Please enter a valid email." });
+  }
+});
+// Hero Box + Background Animation
+const heroBg = document.getElementById('heroBg');
+const boxes = document.querySelectorAll('.hero-box');
+const backgrounds = [
+    'https://cdn.builtin.com/cdn-cgi/image/f=auto,fit=cover,w=1200,h=635,q=80/sites/www.builtin.com/files/2024-01/ai-chip.jpg',
+    'https://img.freepik.com/free-photo/motherboard-background_23-2151733789.jpg',
+    'https://png.pngtree.com/thumb_back/fh260/background/20250305/pngtree-blue-electronic-circuit-board-image_17068763.jpg'
+];
+
+function runSequence(){
+    boxes.forEach(box=>{ box.style.opacity=0; box.style.animation='none'; });
+    setTimeout(()=>{ boxes[0].style.animation='dropDown 3s forwards'; heroBg.style.backgroundImage=`url(${backgrounds[0]})`; },0);
+    setTimeout(()=>{ boxes[1].style.animation='slideLeftRight 3s forwards'; boxes[2].style.animation='slideRightLeft 3s forwards'; heroBg.style.backgroundImage=`url(${backgrounds[1]})`; },3500);
+    setTimeout(()=>{ boxes[3].style.animation='slideUp 3s forwards'; heroBg.style.backgroundImage=`url(${backgrounds[2]})`; },7000);
+}
+runSequence();
+setInterval(runSequence,10500);
+
+
+document.addEventListener("click", function (e) {
+  if (e.target.tagName === "BUTTON" && e.target.innerText.trim() === "Buy Now") {
+
+    const productName =
+      e.target.closest(".product-card")
+      ?.querySelector("h5")
+      ?.innerText || "Product";
+
+    Swal.fire({
+      icon: "success",
+      title: "Product Selected",
+      text: `You selected: ${productName}`,
+      confirmButtonText: "Continue",
+      background: "#0a0f1f",
+      color: "#ffffff",
+      confirmButtonColor: "#00eaff"
+    });
+  }
+});
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

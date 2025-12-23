@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Liberty Electronics — Cable Assemblies</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<style>
+body {
+  font-family: 'Inter', sans-serif;
+  background: #050510;
+  color: #fff;
+  padding-top: 80px;
+}
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  width: 450px;
+  height: 450px;
+  filter: blur(90px);
+  z-index: -1;
+}
+body::before {
+  left: 5%;
+  top: 8%;
+  background: radial-gradient(circle, rgba(0, 200, 255, 0.35), transparent 70%);
+}
+body::after {
+  right: 5%;
+  bottom: 8%;
+  background: radial-gradient(circle, rgba(180, 0, 255, 0.35), transparent 70%);
+}
+
+/* NAVBAR */
+.navbar {
+  background: rgba(10, 10, 20, 0.7);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 9999;
+}
+.logo-wrap {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+}
+.logo-core {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 3px solid #00eaff;
+  border-top-color: #b400ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: spin 3s linear infinite;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+}
+@keyframes spin {
+  from { transform: rotate(0); }
+  to { transform: rotate(360deg); }
+}
+.nav-link { color: rgba(255, 255, 255, 0.85); transition: 0.3s; }
+.nav-link:hover { color: #00eaff; }
+.nav-link.active { border-bottom: 3px solid #00eaff; font-weight: 700; }
+
+/* SECTION */
+.section-title {
+  text-align: center;
+  font-size: 2.7rem;
+  margin-bottom: 40px;
+  color: #00eaff;
+}
+
+.product-card {
+  background: #0a0f1f;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: 0.3s;
+  box-shadow: 0 0 20px #0005;
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  border-color: #00eaff;
+  box-shadow: 0 0 25px #00eaff55;
+}
+.product-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
+.product-card-body {
+  padding: 20px;
+}
+.product-card-body h5 { color: #fff; margin-bottom: 10px; }
+.product-card-body p { color: #ccc; font-size: 0.9rem; }
+.product-card-body button {
+  border: none;
+  border-radius: 50px;
+  padding: 8px 20px;
+  background: #00eaff;
+  color: #050510;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.product-card-body button:hover {
+  background: #b400ff;
+  color: #fff;
+}
+
+ /* FOOTER */ 
+.footer-custom{ background:#0b1326; color:#fff; padding:60px 20px; border-top:2px solid #00eaff; }
+.footer-custom a{text-decoration:none; color:#ccc; transition:0.3s; }
+.footer-custom a:hover{color:#00eaff;}
+.footer-social i{ transition:0.3s; }
+.footer-social i:hover{ color:#00eaff; transform:scale(1.2); }
+.footer-section{ margin-bottom:30px; }
+.footer-section h5{ font-weight:700; margin-bottom:15px; }
+.footer-newsletter input{ border-radius:50px; padding:10px 15px; margin-right:10px; border:none; }
+.footer-newsletter button{ border-radius:50px; padding:10px 20px; border:none; background:#00eaff; color:#050510; font-weight:bold; }
+.footer-newsletter button:hover{ background:#b400ff; color:#fff; }
+
+@media(max-width:768px){ .about-section{ flex-direction:column; gap:20px; } }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark py-3">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+      <div class="logo-wrap">
+        <div class="logo-core">
+          <i class="bi bi-lightning-charge-fill" style="font-size:22px;color:#fff"></i>
+        </div>
+      </div>
+      <span class="fw-bold fs-4">Liberty Electronics</span>
+    </a>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto gap-lg-3">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown" href="#">Products</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="products.html">All Products</a></li>
+            <li><a class="dropdown-item active" href="cable-assemblies.html">Cable Assemblies</a></li>
+            <li><a class="dropdown-item" href="wiring-harnesses.html">Wiring Harnesses</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="testimonials.html">Testimonials</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN SECTION -->
+<section class="container py-5">
+  <h2 class="section-title">Cable Assemblies</h2>
+
+  <div class="row g-4">
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://www.shutterstock.com/image-photo/bundle-electronic-cable-wiring-harness-600nw-2148370123.jpg" />
+        <div class="product-card-body">
+          <h5>Custom Cable Assembly</h5>
+          <p>High‑precision custom cable assemblies designed for industrial and commercial applications.</p>
+          <button>View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://media.gettyimages.com/id/510162486/photo/production-line-of-plastic-industry.jpg?s=612x612&w=gi&k=20&c=XzPK17hdKEkMWGa7dOHHHbS-MMhMfbNUrgUI-PmbwRk=" />
+        <div class="product-card-body">
+          <h5>Industrial Cable Assembly</h5>
+          <p>Durable assemblies built for heavy‑duty machinery, ensuring safety and long‑life performance.</p>
+          <button>View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://www.meridiancableassemblies.com/wp-content/uploads/2022/12/165788809_m.jpg" />
+        <div class="product-card-body">
+          <h5>RF Cable Assembly</h5>
+          <p>High‑frequency RF cable assemblies for communication, satellite, and telecom applications.</p>
+          <button>View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://www.te.com/content/dam/te-com/images/consumer-devices/global/product-hero-rendition/pgp-usb-family-2.jpg" />
+        <div class="product-card-body">
+          <h5>USB Cable Assembly</h5>
+          <p>Reliable USB cable assemblies for devices, PCs, and industrial electronics.</p>
+          <button>View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://www.directwire.com/wp-content/uploads/2020/08/DIRECT-Power-Assembly-Type-W-01-COIL-600-x-450.jpg" />
+        <div class="product-card-body">
+          <h5>Power Cable Assembly</h5>
+          <p>Safe and efficient power cable assemblies for high‑load electrical systems.</p>
+          <button>View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://www.circuitassembly.com/wp-content/uploads/fiber-optic-cable-assemblies-ca.jpg" />
+        <div class="product-card-body">
+          <h5>Fiber Optic Assemblies</h5>
+          <p>High‑speed fiber optic cable assemblies for data‑driven environments.</p>
+          <button>View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://m.media-amazon.com/images/I/61ZqOQ63g8L.jpg" />
+        <div class="product-card-body">
+          <h5>SATA Data Cable Assembly</h5>
+          <p>High‑speed Reliable data transfer between storage devices and computers.</p>
+          <button>View Details</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://www.romtronic.com/wp-content/uploads/2024/01/Car-Wiring-Harness-jpg.webp" />
+        <div class="product-card-body">
+          <h5>Automotive / Wire Harness</h5>
+          <p>Organized wiring for vehicles ensuring safety ‑ efficient electrical distribution</p>
+          <button>View Details</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2023/12/369651055/AA/RK/CC/3301929/silicone-rubber-cable.png" />
+        <div class="product-card-body">
+          <h5>Silicone Cable Assembly</h5>
+          <p>Heat-resistant ‑ waterproof cables for harsh or specialized environments.</p>
+          <button>View Details</button>
+        </div>
+      </div>
+    </div>
+     
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://www.focc-fiber.com/uploads/202012988/ftth-outdoor-drop-cable-fiber-optical-cable34145399730.jpg" />
+        <div class="product-card-body">
+          <h5>Outdoor Cable Assemblies</h5>
+          <p>Durable and safe connections ‑ for outdoor electronics and solar installations.</p>
+          <button>View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://www.yccable.com/upload/catalog_m/custom%20cable%20assembly%20designed%20for%20robotic%20applications,%20featuring%20three%20high-flex,%20durable%20cables%20with%20connectors%20such%20as%20Molex,%20JST,%20and%20Amphenol__25A29kFHP7.jpg" />
+        <div class="product-card-body">
+          <h5>Automated Robotics Cable Assemblies</h5>
+          <p>High‑Organized wiring for robotic arm  ‑ automated manufacturing equipment.”</p>
+          <button>View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://image.made-in-china.com/318f0j00BEyYwIVJLWho/8CHANEL-mp4.webp" />
+        <div class="product-card-body">
+          <h5>8 channel digital snake cable </h5>
+          <p>Efficiently connects multiple audio channels in live sound ‑ studio setups with a single organized cable.</p>
+          <button>View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-HeAPFESYftrZ0UdOrftdKQ0s4C1bJ2kfYA&s" />
+        <div class="product-card-body">
+          <h5>Coaxial CCTV Cable Assemblies</h5>
+          <p>Reliable video ‑ transmission for surveillance and security cameras.</p>
+          <button>View Details</button>
+        </div>
+      </div>
+    </div>
+  <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://www.cambus-tw.com/proimages/design/index_pro1.jpg" />
+        <div class="product-card-body">
+          <h5>Medical-Grade ECG Cable Assembly</h5>
+          <p> Ensures safe and accurate signal transmission ‑for patient monitoring equipment.”</p>
+          <button>View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://5.imimg.com/data5/SELLER/Default/2024/7/437897586/SS/NE/ZH/196426650/150ft-45-7m-hdbaset-certified-cat6a-cable-with-discontinuous-shielding-plenum-cmp-rated.jpg" />
+        <div class="product-card-body">
+          <h5>AV Cable Assemblies</h5>
+          <p>Long-distance video ‑  audio transmission for professional AV systems</p>
+          <button>View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://m.media-amazon.com/images/S/aplus-media-library-service-media/0d04e07c-08ba-4194-b140-e42f76b4fc2d.__CR0,0,1242,1242_PT0_SX300_V1___.jpg" />
+        <div class="product-card-body">
+          <h5>Lightning Cable Assemblies</h5>
+          <p>Reliable charging ‑ data transfer for iPhones and iPads.</p>
+          <button>View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://www.focc-fiber.com/uploads/202012988/ftth-outdoor-drop-cable-fiber-optical-cable34145399730.jpg" />
+        <div class="product-card-body">
+          <h5>24 AWG Cable Assembly</h5>
+          <p>Durable and safe connections ‑ for outdoor electronics and solar installations.</p>
+          <button>View Details</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://m.networklancable.com/photo/pt34155236-24_awg_network_cable_assembly_rj45_through_connector.jpg" />
+        <div class="product-card-body">
+          <h5>Outdoor Cable Assemblies</h5>
+          <p>Compact and flexible ideal for data‑ transmission,networking,and low-power electronic applications.</p>
+          <button>View Details</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ88qRblUqS1TwNOdiKRJ3lRPnTIlirIqmmtg&s" />
+        <div class="product-card-body">
+          <h5>GPU Power Cable Assembly</h5>
+          <p>Delivers stable power to high-performance ‑ graphics cards and computer components.</p>
+          <button>View Details</button>
+        </div>
+      </div>
+    </div>
+   
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://cdn11.bigcommerce.com/s-zuoz5330p9/images/stencil/1280x1280/products/4090/4944/cat-6a-ftp-cmr-bezel-to-mobile-box-fixed123__89302__23573__92529.1499271851.jpg?c=2" />
+        <div class="product-card-body">
+          <h5>Cat6a Cable Assembly</h5>
+          <p>High‑ speed network data transfer with minimal interference</p>
+          <button>View Details</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="product-card">
+        <img src="https://static.dxengineering.com/global/images/prod/xlarge/vlt-hf4-pp-25a_xl.jpg" />
+        <div class="product-card-body">
+          <h5>AC Power Cord Assembly</h5>
+          <p>Connects devices to ‑ mains electricity safely and reliably.</p>
+          <button>View Details</button>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer-custom">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Quick Links</h5>
+        <a href="index.html">Home</a><br>
+        <a href="products.html">Products</a><br>
+        <a href="gallery.html">Gallery</a><br>
+        <a href="about.html">About</a><br>
+        <a href="testimonials.html">Testimonials</a><br>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Support</h5>
+        <a href="#">Privacy Policy</a><br>
+        <a href="#">Terms of Service</a><br>
+        <a href="#">FAQs</a><br>
+        <a href="#">Careers</a><br>
+        <a href="#">Help Center</a>
+      </div>
+
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Contact Info</h5>
+        <p>Email: support@libertyelectronics.com</p>
+        <p>Phone: +92 300 1234567</p>
+        <p>Address: 123 AI Street, Karachi, Pakistan</p>
+      </div>
+
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Newsletter</h5>
+        <div class="footer-newsletter d-flex mb-2">
+          <input type="email" placeholder="Enter your email">
+          <button>Subscribe</button>
+        </div>
+
+        <div class="footer-social d-flex gap-3">
+          <i class="bi bi-facebook fs-5"></i>
+          <i class="bi bi-instagram fs-5"></i>
+          <i class="bi bi-twitter fs-5"></i>
+          <i class="bi bi-linkedin fs-5"></i>
+          <i class="bi bi-youtube fs-5"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <p class="mb-0 text-white-50">© 2025 Liberty Electronics. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+
+
+<script>
+const productDetails = {
+  "Custom Cable Assembly":
+    "Our Custom Cable Assemblies are engineered to meet exact customer specifications. Ideal for industrial, automation, and commercial applications, they offer excellent durability, electrical performance, and long service life.",
+
+  "Industrial Cable Assembly":
+    "Designed for heavy-duty machinery and industrial environments, these cable assemblies ensure secure connections, vibration resistance, and long-term operational safety.",
+
+  "RF Cable Assembly":
+    "High-frequency RF cable assemblies built for telecom, satellite, and wireless communication systems. They ensure low signal loss, stable impedance, and superior shielding.",
+
+  "USB Cable Assembly":
+    "Reliable USB cable assemblies supporting fast data transfer and power delivery. Suitable for consumer electronics, industrial devices, and embedded systems.",
+
+  "Power Cable Assembly":
+    "Engineered for high-current applications, these power cable assemblies provide safe and efficient electrical power distribution for industrial and commercial systems.",
+
+  "Fiber Optic Assemblies":
+    "High-speed fiber optic cable assemblies designed for data centers, telecom networks, and high-bandwidth communication systems with minimal signal loss.",
+
+  "SATA Data Cable Assembly":
+    "SATA data cable assemblies designed for fast and stable data transfer between storage devices, servers, and computer systems.",
+
+  "Automotive / Wire Harness":
+    "Automotive-grade wiring harnesses designed to manage complex electrical systems in vehicles, ensuring safety, reliability, and organized wiring.",
+
+  "Silicone Cable Assembly":
+    "Heat-resistant and flexible silicone cable assemblies ideal for harsh environments, medical equipment, and high-temperature industrial applications.",
+
+  "Outdoor Cable Assemblies":
+    "Weather-resistant cable assemblies designed for outdoor installations, solar systems, and industrial electronics exposed to moisture and UV conditions.",
+
+  "Automated Robotics Cable Assemblies":
+    "High-flex cable assemblies specially designed for robotic arms and automated machinery, ensuring smooth motion and long operational life.",
+
+  "8 channel digital snake cable":
+    "Multi-channel audio snake cable designed for live sound, studio, and broadcast environments, reducing cable clutter and ensuring clean signal transmission.",
+
+  "Coaxial CCTV Cable Assemblies":
+    "Reliable coaxial cable assemblies for CCTV surveillance systems, ensuring stable video transmission and long-distance performance.",
+
+  "Medical-Grade ECG Cable Assembly":
+    "Medical-grade ECG cable assemblies designed for patient monitoring equipment, ensuring accurate signal transmission and compliance with medical safety standards.",
+
+  "AV Cable Assemblies":
+    "Professional AV cable assemblies for high-quality audio and video transmission in studios, conference rooms, and entertainment systems.",
+
+  "Lightning Cable Assemblies":
+    "Certified Lightning cable assemblies providing reliable charging and data synchronization for Apple devices.",
+
+  "24 AWG Cable Assembly":
+    "24 AWG cable assemblies designed for low-power electronics, networking, and signal transmission applications.",
+
+  "GPU Power Cable Assembly":
+    "High-performance GPU power cable assemblies designed to deliver stable and efficient power to modern graphics cards.",
+
+  "Cat6a Cable Assembly":
+    "High-speed Cat6a cable assemblies supporting up to 10Gbps data transfer with reduced interference and enhanced shielding.",
+
+  "AC Power Cord Assembly":
+    "Durable AC power cord assemblies designed to safely connect electrical devices to mains power supply."
+};
+
+document.addEventListener("click", function (e) {
+  if (
+    e.target.tagName === "BUTTON" &&
+    e.target.innerText.trim() === "View Details"
+  ) {
+    const card = e.target.closest(".product-card");
+
+    const title = card.querySelector("h5")?.innerText || "Product";
+    const image = card.querySelector("img")?.src || "";
+    const details = productDetails[title] || "Detailed information will be available soon.";
+
+    Swal.fire({
+      title: title,
+      html: `
+        <img src="${image}" style="width:100%;max-height:220px;object-fit:cover;border-radius:12px;margin-bottom:15px;">
+        <p style="color:#ccc;font-size:14px;line-height:1.7;">${details}</p>
+      `,
+      background: "#0a0f1f",
+      color: "#ffffff",
+      confirmButtonText: "Close",
+      confirmButtonColor: "#00eaff"
+    });
+  }
+});
+
+// Newsletter
+document.querySelector(".footer-newsletter button").addEventListener("click", function(){
+  const email = this.previousElementSibling.value;
+  if(email){
+    Swal.fire({ icon:"success", title:"Subscribed!", text:`You subscribed with ${email}`, timer:2000, showConfirmButton:false });
+    this.previousElementSibling.value = "";
+  } else {
+    Swal.fire({ icon:"error", title:"Oops!", text:"Please enter a valid email." });
+  }
+});
+</script>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+
+
+

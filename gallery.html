@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liberty Electronics — Gallery</title>
+
+<!-- BOOTSTRAP -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" /> 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<style>
+body{ font-family:'Inter', sans-serif; background:#050510; color:#fff; scroll-behavior:smooth; padding-top:80px; }
+body::before, body::after{ content:''; position:fixed; width:450px; height:450px; filter:blur(90px); z-index:-1; }
+body::before{ left:5%; top:8%; background:radial-gradient(circle, rgba(0,200,255,0.35), transparent 70%);} 
+body::after{ right:5%; bottom:8%; background:radial-gradient(circle, rgba(180,0,255,0.35), transparent 70%);} 
+
+.navbar{ background:rgba(10,10,20,0.7); backdrop-filter:blur(15px); border-bottom:1px solid rgba(255,255,255,0.1); position:fixed; top:0; width:100%; z-index:9999; }
+.logo-wrap{ display:inline-grid; place-items:center; width:52px; height:52px; border-radius:50%; }
+.logo-core{ width:46px; height:46px; border-radius:50%; border:3px solid #00eaff; border-top-color:#b400ff; display:flex; align-items:center; justify-content:center; animation: spin 3s linear infinite; background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); }
+@keyframes spin{ from{transform:rotate(0)} to{transform:rotate(360deg)} }
+.nav-link{ color:rgba(255,255,255,0.85); transition:0.3s; }
+.nav-link:hover{ color:#00eaff; }
+.nav-link.active{ border-bottom:3px solid #00eaff; font-weight:700; }
+
+/* GALLERY STYLING */
+.gallery-section{ padding:100px 20px; max-width:1200px; margin:auto; }
+.gallery-section h2{ text-align:center; font-size:2.5rem; margin-bottom:50px; color:#00eaff; }
+.gallery-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:20px; }
+.gallery-item{ position:relative; overflow:hidden; border-radius:20px; transition:0.3s; border:1px solid rgba(255,255,255,0.1); }
+.gallery-item img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.5s; }
+.gallery-item:hover img{ transform:scale(1.1); }
+.gallery-item .overlay{ position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); opacity:0; transition:opacity 0.3s; display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.1rem; font-weight:600; text-align:center; padding:15px; }
+.gallery-item:hover .overlay{ opacity:1; }
+
+/* FOOTER */
+.footer-custom{ background:#0b1326; color:#fff; padding:60px 20px; border-top:2px solid #00eaff; }
+.footer-custom a{text-decoration:none; color:#ccc; transition:0.3s; }
+.footer-custom a:hover{color:#00eaff;}
+.footer-social i{ transition:0.3s; }
+.footer-social i:hover{ color:#00eaff; transform:scale(1.2); }
+.footer-section{ margin-bottom:30px; }
+.footer-section h5{ font-weight:700; margin-bottom:15px; }
+.footer-newsletter input{ border-radius:50px; padding:10px 15px; margin-right:10px; border:none; }
+.footer-newsletter button{ border-radius:50px; padding:10px 20px; border:none; background:#00eaff; color:#050510; font-weight:bold; }
+.footer-newsletter button:hover{ background:#b400ff; color:#fff; }
+
+@media(max-width:768px){ .gallery-grid{ grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); } }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark py-3">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+      <div class="logo-wrap">
+        <div class="logo-core"><i class="bi bi-lightning-charge-fill" style="font-size:22px;color:rgba(255,255,255,0.9)"></i></div>
+      </div>
+      <span class="fw-bold fs-4">Liberty Electronics</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto gap-lg-3 align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+        <li class="nav-item"><a class="nav-link active" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="testimonials.html">Testimonials</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- GALLERY SECTION -->
+<section class="gallery-section">
+  <h2>Our Product Gallery</h2>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZJVzqjIVoS190-GBWGllmZa-Fz5VPW-Mx99UWJoYPyZrw87oPO9quTsUHrQ-I4z7BgPM&usqp=CAU" alt="Product 1">
+      <div class="overlay">AI Gadget 1</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://etimg.etb2bimg.com/photo/83361215.cms" alt="Product 2">
+      <div class="overlay">Smart Device 2</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://roya.dev/wp-content/uploads/2025/09/wearable-technology-discover-the-best-game-change-1756862687.png" alt="Product 3">
+      <div class="overlay">Wearable Tech 3</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://leccygenesis.com/cdn/shop/articles/homeautomation-featured-image-1.jpg?v=1670303229" alt="Product 4">
+      <div class="overlay">Home Automation 4</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://smartaccessories.pk/cdn/shop/collections/download_-_2025-02-02T030632.251.png?v=1738447621&width=1500" alt="Product 5">
+      <div class="overlay">Smart Accessory 5</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://www.humai.blog/content/images/2025/11/013eace6300a55549214807c5242f7ba.png" alt="Product 6">
+      <div class="overlay">AI Gadget 6</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjjvn4FRrVrEgGw_OQxwOqtGWwz2nngfn_rw&s" alt="Product 7">
+      <div class="overlay">VR Headset 7</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/13338501/Screen_Shot_2018_10_26_at_10.08.29_AM.png?quality=90&strip=all&crop=1.0427528675704,0,97.914494264859,100" alt="Product 8">
+      <div class="overlay">Smart Speaker 8</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://cellularkenya.co.ke/wp-content/uploads/2022/09/canon-r7-e1662969546831.jpeg" alt="Product 9">
+      <div class="overlay">Camera 9</div>
+    </div>
+     <div class="gallery-item">
+      <img src="https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/HQ2E2_AV3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=NThVdWM2Yk9SajVpMGpSRWgxREZOVlZya2lKWlJmUEwrYndWOTJiVWJWQUYwVmtIbGRkS25RMVpBRlo0bk5DUTdyVWdQQklJZHo5NGFYZnc1NlNLN1E" alt="Product 10">
+      <div class="overlay">Smart Thermostat 10</div>
+    </div>
+     <div class="gallery-item">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw8aUJUfzgserTrsej-dOjndoAaGgoEcCuvQ&s" alt="Product 11">
+      <div class="overlay">Tablet 11</div>
+    </div>
+     <div class="gallery-item">
+      <img src="https://images.prismic.io//intuzwebsite/7a3d7e62-18ff-4502-b6cb-fde0bd23c4d0_image+%286%29.png?w=2400&q=80&auto=format,compress&fm=png8" alt="Product 12">
+      <div class="overlay">Home Security Systems 12</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://www.shutterstock.com/image-photo/bundle-electronic-cable-wiring-harness-600nw-2148370123.jpg" alt="Product 13">
+      <div class="overlay">Custom Cable Assembly 13</div>
+    </div>
+     <div class="gallery-item">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDX-BL_Xt9zIiV6w3_r9zU2Z3NnBTPL5k1dQ&s" alt="Product 14">
+      <div class="overlay">Wireless Earbuds 14</div>
+    </div>
+     <div class="gallery-item">
+      <img src="https://www.meridiancableassemblies.com/wp-content/uploads/2022/12/165788809_m.jpg" alt="Product 15">
+      <div class="overlay">RF Cable Assembly 15</div>
+    </div>
+     <div class="gallery-item">
+      <img src="https://www.flyeye.io/wp-content/uploads/2024/01/AI-in-delivery-drones.jpg-1047x628-1-1000x600.jpg" alt="Product 16">
+      <div class="overlay">AI Drone 16</div>
+    </div>
+     <div class="gallery-item">
+      <img src="https://m.media-amazon.com/images/I/51pa9KekImL._UF1000,1000_QL80_.jpg" alt="Product 17">
+      <div class="overlay">Optical Laser 17</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://www.racksolutions.com/news/app/uploads/cable-management-with-velcro-and-zip-tie.jpg" alt="Product 18">
+      <div class="overlay">Server Rack Cable Harness 18</div>
+    </div>
+     <div class="gallery-item">
+      <img src="https://www.romtronic.com/wp-content/uploads/2024/01/Car-Wiring-Harness-jpg.webp" alt="Product 19">
+      <div class="overlay">Wire Harness 19</div>
+    </div>
+     <div class="gallery-item">
+      <img src="https://global.rokid.com/cdn/shop/files/review3.png?v=1750238267" alt="Product 20">
+      <div class="overlay"> AR Glasses 20</div>
+    </div>
+     <div class="gallery-item">
+      <img src="https://m.media-amazon.com/images/I/61ZqOQ63g8L.jpg" alt="Product 21">
+      <div class="overlay">SATA Data Cable Assembly 21</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://lifemedusa.com/cdn/shop/files/Red.webp?v=1719929509" alt="Product 22">
+      <div class="overlay">Electric Scooters 22</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://i0.wp.com/dronebotworkshop.com/wp-content/uploads/2019/04/Rear-Connector.jpg?resize=750%2C422&ssl=1" alt="Product 23">
+      <div class="overlay">Robotics Wiring Harness 23</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdgwzofifZuosCR7QsL2al3WqYfhTUL5zbxA&s" alt="Product 24">
+      <div class="overlay">Biometric Security Devices 24</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://image.made-in-china.com/318f0j00BEyYwIVJLWho/8CHANEL-mp4.webp" alt="Product 25">
+      <div class="overlay">8 channel digital snake cable 25</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images-eu.ssl-images-amazon.com/images/I/611XU9og1iL._AC_UL495_SR435,495_.jpg" alt="Product 26">
+      <div class="overlay">Touchless Bathroom Trash Can 26</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-HeAPFESYftrZ0UdOrftdKQ0s4C1bJ2kfYA&s" alt="Product 27">
+      <div class="overlay">Coaxial CCTV Cable Assemblies 27</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://www.gemcable.co.uk/content/uploads/2022/12/This-is-How-You-Build-The-Perfect-Aerospace-Cable-Harness.jpg" alt="Product 28">
+      <div class="overlay"> 28</div>>Aerospace Wiring Harness
+    </div>
+    <div class="gallery-item">
+      <img src="https://5.imimg.com/data5/SELLER/Default/2024/4/410599969/BO/SG/GO/200324666/portable-air-conditioner-usb-desktop-cooler-humidifier-mini-cooling-fan-500x500.jpg" alt="Product 29">
+      <div class="overlay">Portable Air Conditioner Fan 29</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://www.cambus-tw.com/proimages/design/index_pro1.jpg" alt="Product 30">
+      <div class="overlay">ECG Cable Assembly 30</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://sc02.alicdn.com/kf/H527ec693fa534f9f8fe4b056ad088009C/238045879/H527ec693fa534f9f8fe4b056ad088009C.jpeg" alt="Product 31">
+      <div class="overlay">>MiraScreen G7 31</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://sc04.alicdn.com/kf/H475de77c2e704a16b52cfc366c9fffe01.jpg" alt="Product 32">
+      <div class="overlay">Radar Sensor Harness 32</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://m.media-amazon.com/images/S/aplus-media-library-service-media/0d04e07c-08ba-4194-b140-e42f76b4fc2d.__CR0,0,1242,1242_PT0_SX300_V1___.jpg" alt="Product 33">
+      <div class="overlay">Lightning Cable Assemblies 33</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://image-cdn.ubuy.com/process-image?data=eyJsIjoiaHR0cHM6XC9cL2ltYWdlcy1jZG4udWJ1eS5jby5pblwvNjMzM2M0NGU0NmFiMDc2NmY4M2IzYzVkLXV2LWxpZ2h0LXNhbml0aXplci1ib3gtdXYtYy1zdGVyaWxpemVyLmpwZyIsInEiOjQ1LCJ3IjoxNzAsImgiOjE3MCwiZiI6ImpwZWcifQ&format=jpeg" alt="Product 34">
+      <div class="overlay">UV Sterilizer Boxes 34</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://m.media-amazon.com/images/I/31BkFL6MvXL._SL500_.jpg" alt="Product 35">
+      <div class="overlay">Automatic Soap Dispensers 35</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://www.focc-fiber.com/uploads/202012988/ftth-outdoor-drop-cable-fiber-optical-cable34145399730.jpg" alt="Product 36">
+      <div class="overlay">24 AWG Cable Assembly 36</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://thumbs.dreamstime.com/b/pasir-puteh-kelantan-malaysia-october-industrial-control-cabinet-showing-organized-relays-multiple-wiring-terminal-411525411.jpg" alt="Product 37">
+      <div class="overlay">Industrial Wiring Solutions 37</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://www.farmaciasdirect.eu/cdn/shop/files/mobiclinic-manta-electrica-con-mando-160-x-120-cm.webp?v=1725117859" alt="Product 38">
+      <div class="overlay">Electric Heated Blankets 38</div>
+    </div>
+   <div class="gallery-item">
+      <img src="https://image.made-in-china.com/202f0j00hdrlgFSWAbpu/Hot-Sale-Multifunction-Electric-Ceramic-Stove-Electric-Infrared-Cooker-Induction-Cookers.webp" alt="Product 39">
+      <div class="overlay">Electric Stove 39</div>
+    </div>
+     <div class="gallery-item">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ88qRblUqS1TwNOdiKRJ3lRPnTIlirIqmmtg&s" alt="Product 40">
+      <div class="overlay">GPU Power Cable Assembly 40</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://momdaughts.com/cdn/shop/files/Smart-Menstrual-Heating-Pad-Warm-Palace-Belt-Relief-Waist-Pain-Cramps-Vibrating-Abdominal-Massager-Electric-Waist.jpg__1.png?v=1764529833" alt="Product 41">
+      <div class="overlay">Electric period cramp massager 41</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://static.dxengineering.com/global/images/prod/xlarge/vlt-hf4-pp-25a_xl.jpg" alt="Product 42 ">
+      <div class="overlay">AC Power Cord Assembly 42</div>
+    </div>
+     <div class="gallery-item">
+      <img src="https://www.provideocoalition.com/wp-content/uploads/small-BMPCC-RAW-3.jpg" alt="Product 43">
+      <div class="overlay">Pocket Cinema 43</div>
+    </div>
+     <div class="gallery-item">
+      <img src="https://5.imimg.com/data5/SELLER/Default/2024/7/437897586/SS/NE/ZH/196426650/150ft-45-7m-hdbaset-certified-cat6a-cable-with-discontinuous-shielding-plenum-cmp-rated.jpg" alt="Product 44">
+      <div class="overlay">AV Cable Assemblies 44</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer class="footer-custom">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Quick Links</h5>
+        <a href="index.html">Home</a><br>
+        <a href="products.html">Products</a><br>
+        <a href="gallery.html">Gallery</a><br>
+        <a href="about.html">About</a><br>
+        <a href="testimonials.html">Testimonials</a><br>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Support</h5>
+        <a href="#">Privacy Policy</a><br>
+        <a href="#">Terms of Service</a><br>
+        <a href="#">FAQs</a><br>
+        <a href="#">Careers</a><br>
+        <a href="#">Help Center</a>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Contact Info</h5>
+        <p>Email: support@libertyelectronics.com</p>
+        <p>Phone: +92 300 1234567</p>
+        <p>Address: 123 AI Street, Karachi, Pakistan</p>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Newsletter</h5>
+        <div class="footer-newsletter d-flex mb-2">
+          <input type="email" placeholder="Enter your email">
+          <button>Subscribe</button>
+        </div>
+        <div class="footer-social d-flex gap-3">
+          <a href="#" onclick="Swal.fire('Follow us on Facebook!')"><i class="bi bi-facebook fs-5"></i></a>
+          <a href="#" onclick="Swal.fire('Follow us on Instagram!')"><i class="bi bi-instagram fs-5"></i></a>
+          <a href="#" onclick="Swal.fire('Follow us on Twitter!')"><i class="bi bi-twitter fs-5"></i></a>
+          <a href="#" onclick="Swal.fire('Follow us on LinkedIn!')"><i class="bi bi-linkedin fs-5"></i></a>
+          <a href="#" onclick="Swal.fire('Follow us on YouTube!')"><i class="bi bi-youtube fs-5"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <p class="mb-0 text-white-50">© 2025 Liberty Electronics. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+<script> 
+  
+// FOOTER SUBSCRIBE
+document.querySelector(".footer-newsletter button").addEventListener("click", function(){
+  const email = this.previousElementSibling.value;
+  if(email){
+    Swal.fire({ icon:"success", title:"Subscribed!", text:`You subscribed with ${email}`, timer:2000, showConfirmButton:false });
+    this.previousElementSibling.value = "";
+  } else {
+    Swal.fire({ icon:"error", title:"Oops!", text:"Please enter a valid email." });
+  }
+});
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liberty Electronics — Wiring Harnesses</title>
+
+<!-- BOOTSTRAP -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<style>
+body{ font-family:'Inter', sans-serif; background:#050510; color:#fff; scroll-behavior:smooth; padding-top:80px; }
+body::before, body::after{ content:''; position:fixed; width:450px; height:450px; filter:blur(90px); z-index:-1; }
+body::before{ left:5%; top:8%; background:radial-gradient(circle, rgba(0,200,255,0.35), transparent 70%);} 
+body::after{ right:5%; bottom:8%; background:radial-gradient(circle, rgba(180,0,255,0.35), transparent 70%);} 
+
+.navbar{ background:rgba(10,10,20,0.7); backdrop-filter:blur(15px); border-bottom:1px solid rgba(255,255,255,0.1); position:fixed; top:0; width:100%; z-index:9999; }
+.logo-wrap{ display:inline-grid; place-items:center; width:52px; height:52px; border-radius:50%; }
+.logo-core{ width:46px; height:46px; border-radius:50%; border:3px solid #00eaff; border-top-color:#b400ff; display:flex; align-items:center; justify-content:center; animation: spin 3s linear infinite; background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); }
+@keyframes spin{ from{transform:rotate(0)} to{transform:rotate(360deg)} }
+.nav-link{ color:rgba(255,255,255,0.85); transition:0.3s; }
+.nav-link:hover{ color:#00eaff; }
+.nav-link.active{ border-bottom:3px solid #00eaff; font-weight:700; }
+
+.section-header{
+  text-align:center;
+  color:#00eaff;
+  font-size:2.6rem;
+  font-weight:800;
+  margin-bottom:50px;
+}
+
+.wiring-container{
+  max-width:1200px;
+  margin:auto;
+  padding:100px 20px;
+}
+
+.wiring-card{
+  background:#0a0f1f;
+  border:1px solid rgba(255,255,255,0.1);
+  padding:30px;
+  border-radius:18px;
+  margin-bottom:40px;
+  transition:0.3s;
+  box-shadow:0 0 20px #0005;
+}
+.wiring-card:hover{
+  transform:translateY(-6px);
+  border-color:#00eaff;
+}
+
+.wiring-img{
+  width:100%;
+  border-radius:12px;
+  height:300px;
+  object-fit:cover;
+  margin-bottom:20px;
+}
+
+.wiring-card h3{
+  color:#fff;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.wiring-card p{
+  color:#ccc;
+  line-height:1.6;
+}
+
+.order-btn{
+  margin-top:15px;
+  padding:10px 22px;
+  background:#00eaff;
+  border:none;
+  border-radius:50px;
+  font-weight:700;
+  color:#050510;
+  transition:0.3s;
+}
+.order-btn:hover{
+  background:#b400ff;
+  color:#fff;
+}
+
+/* FOOTER */
+.footer-custom{ background:#0b1326; color:#fff; padding:60px 20px; border-top:2px solid #00eaff; }
+.footer-custom a{text-decoration:none; color:#ccc; transition:0.3s; }
+.footer-custom a:hover{color:#00eaff;}
+.footer-social i{ transition:0.3s; }
+.footer-social i:hover{ color:#00eaff; transform:scale(1.2); }
+.footer-section{ margin-bottom:30px; }
+.footer-section h5{ font-weight:700; margin-bottom:15px; }
+.footer-newsletter input{ border-radius:50px; padding:10px 15px; margin-right:10px; border:none; }
+.footer-newsletter button{ border-radius:50px; padding:10px 20px; border:none; background:#00eaff; color:#050510; font-weight:bold; }
+.footer-newsletter button:hover{ background:#b400ff; color:#fff; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark py-3">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+      <div class="logo-wrap">
+        <div class="logo-core"><i class="bi bi-lightning-charge-fill" style="font-size:22px;color:rgba(255,255,255,0.9)"></i></div>
+      </div>
+      <span class="fw-bold fs-4">Liberty Electronics</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto gap-lg-3 align-items-lg-center">
+
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+            Products
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="products.html">All Products</a></li>
+            <li><a class="dropdown-item" href="cable-assemblies.html">Cable Assemblies</a></li>
+            <li><a class="dropdown-item" href="wiring-harnesses.html">Wiring Harnesses</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="testimonials.html">Testimonials</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- CONTENT -->
+<section class="wiring-container">
+  <h2 class="section-header">Wiring Harnesses</h2>
+
+  <div class="wiring-card">
+    <img class="wiring-img" src="https://wiring-harness.com/wp-content/uploads/2022/06/control-panel-wire-harness-1.jpg" />
+    <h3>Custom Wiring Harness</h3>
+    <p>
+      High-performance custom wiring harness designed for automotive, industrial,
+      and commercial applications. Built with premium materials for durability,
+      heat resistance, and maximum conductivity.
+    </p>
+    <button class="order-btn">Order Now</button>
+  </div>
+
+  <div class="wiring-card">
+    <img class="wiring-img" src="https://mktest.com/wp-content/uploads/2022/08/BLOG-2020-7b-What-is-wire-harness-testing-widget.jpg" />
+    <h3>Automotive Wiring Harness</h3>
+    <p>
+      Precision-engineered automotive wiring harness for secure, efficient, and stable
+      electrical distribution across vehicle systems.
+    </p>
+    <button class="order-btn">Order Now</button>
+  </div>
+
+  <div class="wiring-card">
+    <img class="wiring-img" src="https://thumbs.dreamstime.com/b/pasir-puteh-kelantan-malaysia-october-industrial-control-cabinet-showing-organized-relays-multiple-wiring-terminal-411525411.jpg" />
+    <h3>Industrial Wiring Solutions</h3>
+    <p>
+      Designed for heavy-duty industrial environments requiring robust cable management,
+      power routing, and long-term reliability.
+    </p>
+    <button class="order-btn">Order Now</button>
+  </div>
+
+  <div class="wiring-card">
+    <img class="wiring-img" src="https://media.licdn.com/dms/image/v2/D5612AQFOcK6s-l8PpQ/article-inline_image-shrink_1000_1488/article-inline_image-shrink_1000_1488/0/1705454105402?e=2147483647&v=beta&t=Vfi6hbVbqeRHuHOUDmQu9Ts3ZtnO50Z4obM6n8dq3EU" />
+    <h3>Engine Wiring Harness</h3>
+    <p>
+     Ensures smooth connection between engine sensors and control units for optimal performance.
+    Designed to handle heat, vibration, and high-load conditions reliably.
+    </p>
+    <button class="order-btn">Order Now</button>
+  </div>
+
+
+  <div class="wiring-card">
+    <img class="wiring-img" src="https://i.redd.it/wiring-ha-to-home-security-system-v0-v1gvow8bve6b1.jpg?width=3024&format=pjpg&auto=webp&s=dce0ae49432e9329d51bd8717785eada933e84db" />
+    <h3>Security System Wiring Harness</h3>
+    <p>
+     Connects cameras, DVRs, power supplies, and sensors for a stable surveillance network.
+    Ensures uninterrupted video signal and long-distance power delivery.
+    Ideal for homes, offices, warehouses, and commercial security setups.
+    </p>
+    <button class="order-btn">Order Now</button>
+  </div>
+
+
+  <div class="wiring-card">
+    <img class="wiring-img" src="https://www.racksolutions.com/news/app/uploads/cable-management-with-velcro-and-zip-tie.jpg" />
+    <h3>Server Rack Cable Harness</h3>
+    <p>
+      Keeps network and power cables neatly arranged inside server racks.
+     Improves airflow, reduces heat buildup, and enhances system performance.
+     Perfect for data centers, IT rooms, and networking setups.
+    </p>
+    <button class="order-btn">Order Now</button>
+  </div>
+
+
+  <div class="wiring-card">
+    <img class="wiring-img" src="https://i0.wp.com/dronebotworkshop.com/wp-content/uploads/2019/04/Rear-Connector.jpg?resize=750%2C422&ssl=1" />
+    <h3>Robotics Wiring Harness</h3>
+    <p>
+     Provides flexible wiring for robotic arms and automation systems that move in multiple directions.
+     Ensures stable signal flow for precise motion control and sensor feedback.
+     Designed to bend repeatedly without damage or signal loss.
+    </p>
+    <button class="order-btn">Order Now</button>
+  </div>
+
+
+  <div class="wiring-card">
+    <img class="wiring-img" src="https://www.gemcable.co.uk/content/uploads/2022/12/This-is-How-You-Build-The-Perfect-Aerospace-Cable-Harness.jpg" />
+    <h3>Aerospace Wiring Harness</h3>
+    <p>
+      Used in aircraft and aviation systems, this harness is lightweight yet extremely durable
+      It resists extreme temperatures, vibration, and pressure changes
+      Designed with high-precision engineering for mission-critical safety and performance.
+    </p>
+    <button class="order-btn">Order Now</button>
+  </div>
+
+
+  <div class="wiring-card">
+    <img class="wiring-img" src="https://sz-fpi.com/wp-content/uploads/2024/11/wire-harness-assembly.jpg" />
+    <h3>Industrial Machine Wiring Loom</h3>
+    <p>
+      Organizes heavy-duty cables used in machinery and production equipment.
+     Protects wiring from abrasion, oil, heat, and mechanical stress.
+    Improves safety and extends the lifespan of industrial machines.
+    </p>
+    <button class="order-btn">Order Now</button>
+  </div>
+
+  <div class="wiring-card">
+    <img class="wiring-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnS0kHtyWdIznk4MAR9WsgZWl-yDpDFpIbPw&s" />
+    <h3>Fuse Box Wiring Harness</h3>
+    <p>
+     Connects fuse panel with all circuits of the vehicle or machine.
+     Improves electrical safety through proper load distribution.
+     Neat and organized wiring for easier troubleshooting.
+    </p>
+    <button class="order-btn">Order Now</button>
+  </div>
+
+  <div class="wiring-card">
+    <img class="wiring-img" src="https://sc04.alicdn.com/kf/H475de77c2e704a16b52cfc366c9fffe01.jpg" />
+    <h3>LiDAR & Radar Sensor Harness</h3>
+    <p>
+      Pre-wired harness designed for LiDAR and radar modules in autonomous vehicles.
+     Ensures accurate signal transmission and stable power supply to all sensors.
+     Built for high reliability in harsh automotive environments with vabration and temperature resistance.
+    </p>
+    <button class="order-btn">Order Now</button>
+  </div>
+
+
+</section>
+
+<!-- FOOTER -->
+<footer class="footer-custom">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Quick Links</h5>
+        <a href="index.html">Home</a><br>
+        <a href="products.html">Products</a><br>
+        <a href="gallery.html">Gallery</a><br>
+        <a href="about.html">About</a><br>
+        <a href="testimonials.html">Testimonials</a><br>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Support</h5>
+        <a href="#">Privacy Policy</a><br>
+        <a href="#">Terms of Service</a><br>
+        <a href="#">FAQs</a><br>
+        <a href="#">Careers</a><br>
+        <a href="#">Help Center</a>
+      </div>
+
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Contact Info</h5>
+        <p>Email: support@libertyelectronics.com</p>
+        <p>Phone: +92 300 1234567</p>
+        <p>Address: 123 AI Street, Karachi, Pakistan</p>
+      </div>
+
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Newsletter</h5>
+        <div class="footer-newsletter d-flex mb-2">
+          <input type="email" placeholder="Enter your email">
+          <button>Subscribe</button>
+        </div>
+
+        <div class="footer-social d-flex gap-3">
+          <i class="bi bi-facebook fs-5"></i>
+          <i class="bi bi-instagram fs-5"></i>
+          <i class="bi bi-twitter fs-5"></i>
+          <i class="bi bi-linkedin fs-5"></i>
+          <i class="bi bi-youtube fs-5"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <p class="mb-0 text-white-50">© 2025 Liberty Electronics. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener("click", function (e) {
+  if (
+    e.target.tagName === "BUTTON" &&
+    e.target.classList.contains("order-btn")
+  ) {
+    const card = e.target.closest(".wiring-card");
+
+    const title = card.querySelector("h3")?.innerText || "Product";
+    const description = card.querySelector("p")?.innerText || "";
+    const image = card.querySelector("img")?.src || "";
+
+    Swal.fire({
+      icon: "success",
+      title: "Order Placed!",
+      html: `
+        <img src="${image}" style="width:100%;max-height:200px;object-fit:cover;border-radius:12px;margin-bottom:12px;">
+        <h4 style="margin:8px 0;color:#00eaff;">${title}</h4>
+        <p style="color:#ccc;font-size:14px;">${description}</p>
+        <p style="margin-top:12px;font-weight:600;color:#b4ffea;">
+          Your order has been placed successfully.
+        </p>
+      `,
+      confirmButtonText: "OK",
+      background: "#0a0f1f",
+      color: "#ffffff",
+      confirmButtonColor: "#00eaff"
+    });
+  }
+});
+
+// Newsletter
+document.querySelector(".footer-newsletter button").addEventListener("click", function(){
+  const email = this.previousElementSibling.value;
+  if(email){
+    Swal.fire({ icon:"success", title:"Subscribed!", text:`You subscribed with ${email}`, timer:2000, showConfirmButton:false });
+    this.previousElementSibling.value = "";
+  } else {
+    Swal.fire({ icon:"error", title:"Oops!", text:"Please enter a valid email." });
+  }
+});
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+

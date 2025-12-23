@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liberty Electronics — Home</title>
+
+<!-- BOOTSTRAP -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+<!-- SWEETALERT2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<style>
+body{ font-family:'Inter', sans-serif; background:#050510; color:#fff; scroll-behavior:smooth; padding-top:80px; }
+body::before, body::after{ content:''; position:fixed; width:450px; height:450px; filter:blur(90px); z-index:-1; }
+body::before{ left:5%; top:8%; background:radial-gradient(circle, rgba(0,200,255,0.35), transparent 70%);} 
+body::after{ right:5%; bottom:8%; background:radial-gradient(circle, rgba(180,0,255,0.35), transparent 70%);} 
+
+.navbar{ background:rgba(10,10,20,0.7); backdrop-filter:blur(15px); border-bottom:1px solid rgba(255,255,255,0.1); position:fixed; top:0; width:100%; z-index:9999; }
+.logo-wrap{ display:inline-grid; place-items:center; width:52px; height:52px; border-radius:50%; }
+.logo-core{ width:46px; height:46px; border-radius:50%; border:3px solid #00eaff; border-top-color:#b400ff; display:flex; align-items:center; justify-content:center; animation: spin 3s linear infinite; background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); }
+@keyframes spin{ from{transform:rotate(0)} to{transform:rotate(360deg)} }
+.nav-link{ color:rgba(255,255,255,0.85); transition:0.3s; }
+.nav-link:hover{ color:#00eaff; }
+.nav-link.active{ border-bottom:3px solid #00eaff; font-weight:700; }
+
+.form-control{ border-radius:50px; border:1px solid rgba(0,255,255,0.5); background:#fff; color:#050510; padding:12px 20px; transition:0.3s; }
+.form-control:focus{ box-shadow:0 0 20px #00eaff80; border-color:#00eaff; background:#fff; color:#050510; }
+.btn-search{ border-radius:50px; padding:12px 25px; background:#00eaff; color:#050510; font-weight:bold; border:none; transition:0.3s; }
+.btn-search:hover{ background:#b400ff; color:#fff; box-shadow:0 0 15px #b400ff70; }
+
+.hero{ padding:120px 20px 80px; text-align:center; position:relative; background:url('c:\Users\saba\Desktop\e-project\PixVerse_V5.5_Image_Text_360P_muje_liberty_ele (1).mp4') no-repeat center center/cover; height:500px; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+.hero h1{ font-size:3.5rem; font-weight:800; text-shadow:0 0 15px #000;}
+.hero p{ font-size:1.2rem; margin-bottom:30px; text-shadow:0 0 10px #000;}
+
+.product-card{ background:rgba(255,255,255,0.05); padding:20px; border-radius:15px; border:1px solid rgba(255,255,255,0.1); transition:0.3s; text-align:center; }
+.product-card:hover{ transform:translateY(-8px); box-shadow:0 0 25px #00eaff50; }
+.product-card img{ width:100%; border-radius:12px; filter:drop-shadow(0 0 15px #00d0ff50); }
+.product-card h5{ margin-top:15px; font-weight:600; }
+.product-card p{ color:#ccc; }
+
+.action-btns button{
+  border-radius:50px; 
+  padding:10px 18px;
+  margin-top:10px;
+  font-weight:bold;
+  border:none;
+  background:#00eaff;
+  color:#050510;
+  transition:0.3s;
+  cursor:pointer;
+}
+.action-btns button.clicked{
+  background:#b400ff !important;
+  color:#fff !important;
+}
+
+.cart-icon{
+  position:relative;
+  color:white;
+  font-size:24px;
+  margin-left:15px;
+  cursor:pointer;
+  text-decoration:none;
+}
+.cart-count{
+  position:absolute;
+  top:-7px;
+  right:-10px;
+  background:#ff0048;
+  padding:3px 7px;
+  border-radius:50%;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.footer-custom{ background:#0b1326; color:#fff; padding:60px 20px; border-top:2px solid #00eaff; }
+.footer-custom a{text-decoration:none; color:#ccc; transition:0.3s; }
+.footer-custom a:hover{color:#00eaff;}
+.footer-social i{ transition:0.3s; }
+.footer-social i:hover{ color:#00eaff; transform:scale(1.2); }
+.footer-section{ margin-bottom:30px; }
+.footer-section h5{ font-weight:700; margin-bottom:15px; }
+.footer-newsletter input{ border-radius:50px; padding:10px 15px; margin-right:10px; border:none; }
+.footer-newsletter button{ border-radius:50px; padding:10px 20px; border:none; background:#00eaff; color:#050510; font-weight:bold; }
+.footer-newsletter button:hover{ background:#b400ff; color:#fff; }
+
+@media(max-width:767px){
+  .hero h1{ font-size:2rem;}
+  .hero p{ font-size:1rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark py-3">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+      <div class="logo-wrap">
+        <div class="logo-core"><i class="bi bi-lightning-charge-fill" style="font-size:22px;color:rgba(255,255,255,0.9)"></i></div>
+      </div>
+      <span class="fw-bold fs-4">Liberty Electronics</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto gap-lg-3 align-items-lg-center">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="testimonials.html">Testimonials</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+      <div class="d-flex align-items-center ms-3 mt-2 mt-lg-0">
+        <input type="text" class="form-control me-2" id="searchInput" placeholder="Search products...">
+        <button class="btn btn-search" id="searchBtn">Go</button>
+        <a href="cart.html" class="cart-icon ms-3">
+          <i class="bi bi-cart3"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<!-- <section id="hero" class="hero">
+  <h1>Future of Electronics Starts Here</h1>
+  <p>AI-Enhanced Store • Ultra Modern • Stylish • Fast</p>
+</section> -->
+<section id="hero" class="hero" style="position:relative; height:500px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; color:#fff; overflow:hidden;">
+  
+  <!-- Video Background -->
+  <video autoplay muted loop playsinline style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:-1;">
+    <source src="PixVerse_V5.5_Image_Text_360P_muje_liberty_ele.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Hero Content -->
+  <h1>Future of Electronics Starts Here</h1>
+  <p>AI-Enhanced Store • Ultra Modern • Stylish • Fast</p>
+
+</section>
+
+
+<!-- PRODUCTS -->
+<section id="products" class="container py-5">
+  <h2 class="text-center mb-5">Trending Electronics </h2>
+  <div class="row g-4" id="productList"></div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer-custom">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Quick Links</h5>
+        <a href="index.html">Home</a><br>
+        <a href="products.html">Products</a><br>
+        <a href="gallery.html">Gallery</a><br>
+        <a href="about.html">About</a><br>
+        <a href="testimonials.html">Testimonials</a><br>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Support</h5>
+        <a href="#">Privacy Policy</a><br>
+        <a href="#">Terms of Service</a><br>
+        <a href="#">FAQs</a><br>
+        <a href="#">Careers</a><br>
+        <a href="#">Help Center</a>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Contact Info</h5>
+        <p>Email: support@libertyelectronics.com</p>
+        <p>Phone: +92 300 1234567</p>
+        <p>Address: 123 AI Street, Karachi, Pakistan</p>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-4 footer-section">
+        <h5>Newsletter</h5>
+        <div class="footer-newsletter d-flex mb-2">
+          <input type="email" placeholder="Enter your email">
+          <button>Subscribe</button>
+        </div>
+        <div class="footer-social d-flex gap-3">
+          <a href="#" onclick="Swal.fire('Follow us on Facebook!')"><i class="bi bi-facebook fs-5"></i></a>
+          <a href="#" onclick="Swal.fire('Follow us on Instagram!')"><i class="bi bi-instagram fs-5"></i></a>
+          <a href="#" onclick="Swal.fire('Follow us on Twitter!')"><i class="bi bi-twitter fs-5"></i></a>
+          <a href="#" onclick="Swal.fire('Follow us on LinkedIn!')"><i class="bi bi-linkedin fs-5"></i></a>
+          <a href="#" onclick="Swal.fire('Follow us on YouTube!')"><i class="bi bi-youtube fs-5"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <p class="mb-0 text-white-50">© 2025 Liberty Electronics. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- SCRIPT -->
+<script>
+// PRODUCTS ARRAY
+const products = [
+  {name:"Laptop", desc:"Lightning Speed • AI-Enhanced", img:"https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1700517566-716Agdq-YPL.jpg?crop=1xw:1.00xh;center,top&resize=980:*"},
+  {name:"Headphones", desc:"Deep Bass • Smart Noise Control", img:"https://www.ion.com.pk/wp-content/uploads/Clipboard_07-23-2024_11.jpg"},
+  {name:"Smart AI Watch", desc:"Heart Rate • Notifications • AI Tracking", img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCSdIPOVq_ZsFYDr37WJpz89mGWoEMZKagvQ&s"},
+  {name:"Mouse", desc:"RGB Lights, Long Battery Life", img:"https://hk.momax.net/cdn/shop/files/MS02_L2_01_1500_Additional_JPG_Medium_a0e638c5-d5f5-49ec-a129-fc0fc48aede4.jpg?v=1742745828"},
+  {name:"LED tv", desc:"Affordable • Clear Picture", img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE8YbaW-fRwjTSMsC02WoK2n5Lg8YlKRN_XA&s"},
+  {name:"Iphone", desc:"Dual Camera • Durable Design", img:"https://i5.walmartimages.com/seo/Apple-iPhone-X-64GB-Unlocked-GSM-Phone-w-Dual-12MP-Camera-Space-Gray-B-Grade-Used_15c2b968-bb85-41a4-9292-b017f78fe797.a66ebbf32b6d53b6d6eb14c47434ac04.jpeg"},
+  {name:"Power Bank", desc:"Auto Voltage Detection", img:"https://xiaomisale.com/cdn/shop/files/XiaomiPowerBank20000_IntegratedCable_b.jpg?v=1758803962&width=370%20370w"},
+  {name:"Smart Speaker", desc:"Voice Control • High Bass", img:"https://xcessorieshub.com/wp-content/uploads/2024/10/Mi-Smart-Speaker-AudioEFX.jpg"},
+  {name:"Tablet", desc:"Multi-tasking • Fast Processor • Wi-Fi Connectivity", img:"https://www.t-shop.com.pk/wp-content/uploads/2023/10/Tshop-Lenovo-Tab-M9-2023-Tablet-Long-Battery-Life-9-HD-Front-2MP-Rear-8MP-Camera-3GB-Memory-32GB-Storage-Android-12_Best-Price-Pakistan-2.webp"},
+  {name:"Keyboard", desc:"Compact • Rechargeable • Multi-Device", img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaih64POuIMB-SF2v2l9PilesuXhwIa82OhA&s"},
+  {name:"Camera", desc:"Waterproof • 4K Recording • Compact", img:"https://hashmicameras.pk/wp-content/uploads/2023/03/1561852319_1274706.webp"},
+  {name:"Smart Thermostat", desc:"Built-In Air Quality Monitor", img:"https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/HQ2E2_AV3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=NThVdWM2Yk9SajVpMGpSRWgxREZOVlZya2lKWlJmUEwrYndWOTJiVWJWQUYwVmtIbGRkS25RMVpBRlo0bk5DUTdyVWdQQklJZHo5NGFYZnc1NlNLN1E"},
+  {name:"Mobile phone", desc:"buy latest smart phone now",img:"https://assets.nikshanonline.com/wp-content/uploads/2023/10/Mobiles.png"},
+   {name:"Portable Travel Iron,", desc:"Mini Steam Handheld Ironing Machine, For Home ",img:"https://img.drz.lazcdn.com/static/pk/p/8a2bf1c4941d6f4143e89738b30336ea.jpg_720x720q80.jpg"},
+    {name:"Video game", desc:"Games Dual Controllers | Supports",img:"https://saamaan.pk/cdn/shop/files/m22.png?v=1759317801&width=800"},
+     {name:"Electric Lamp", desc:"Rechargeable Multifunction LED with Wave Sensor & Magnetic Base",img:"https://saamaan.pk/cdn/shop/files/BemeElectricLamp.png?v=1758699913&width=600"},
+      {name:"Air Conditioner Fan", desc:"Mini Rechargeable Evaporative Air",img:"https://saamaan.pk/cdn/shop/files/download_20.png?v=1747638887&width=1200"},
+       {name:"PULSE OXIMETER FINGERTIP", desc:"designed to quickly and accurately measure your blood oxygen saturation (SpO₂) and pulse rate",img:"https://www.gadgetsonline.pk/wp-content/uploads/2020/10/PULL-300x300.jpg"},
+        {name:"Ring light", desc:"This ring fill light delivers smooth, shadow-free illumination",img:"https://www.gadgetsonline.pk/wp-content/uploads/2020/10/1d2b1b8df0f23f1dd88a9afa08ae6ac4-300x300.jpg"},
+        {name:"Laptop charger", desc:"This charger is fast charger of laptop",img:"https://pakistanstore.pk/wp-content/uploads/2025/01/TOSHIBA-65W-Laptop-Charger.webp"},
+         {name:"ELECTRIC HAIR CLIPPLER", desc:"modern design makes it suitable for both home and professional use.",img:"https://www.gadgetsonline.pk/wp-content/uploads/2020/11/30-300x300.jpg"},
+          {name:"Wireless Speaker",desc:"performance with modern technology",img:"https://m1.com.pk/wp-content/uploads/2024/09/pk305_001-800x800-1.jpg"},
+           {name:"Cell Phone Stand", desc:"Cell Phone Stand with Wireless Bluetooth Speaker, Colorful LED Lights",img:"https://img.drz.lazcdn.com/static/pk/p/bf7ae3cc9d80f6b49e8912442994690b.jpg_200x200q80.avif"},
+            {name:"Handheld Game", desc:"Portable Gaming Player with Rechargeable Battery 3.0",img:"https://img.drz.lazcdn.com/static/pk/p/18c400f64ab02307e9fd38b96cdf5b4c.jpg_200x200q80.avif"},
+             {name:"Wall Charger", desc:"Power Strip Multi Plug Adapter Spaced for Home Travel Office",img:"https://images.priceoye.pk/anker-zolo-20w-mini-charger-a2699j11-pakistan-priceoye-lkvbu-100x100.webp"},
+              {name:"XLeader Shower Speaker", desc:"Mini Bluetooth Wireless Small Speaker with Lights, Suction Cup and Mic for Bathroom, Crystal Sound&Bass",img:"https://m.media-amazon.com/images/I/51vobk52GeL._AC_UL640_QL65_.jpg"},
+               {name:"Compressed Air Duster", desc:"A Compressed Air Duster is a powerful cleaning tool designed to remove dust, dirt, and debris from hard-to-reach areas. Perfect for keyboards, electronics, cameras, and delicate devices.",img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO7cDMWU38m9aRVU9wmUuCOc_toS3DjKeS6Q&s"},
+                {name:"USB C Cable", desc:"Fast Charging USB C to USB C Cable",img:"https://m.media-amazon.com/images/I/81Ih3NzDhpL._AC_UY218_.jpg"},
+                 {name:"Smart Portable Projector", desc:" Mini Projector with WiFi and Bluetooth",img:"https://m.media-amazon.com/images/I/71UPJTG8MvL._AC_UY218_.jpg"},
+                  {name:"Screen Cleaner", desc:"Phone, Tablet and Car Screen Cleaner.",img:"https://img.drz.lazcdn.com/g/kf/Sa1968e0c6db047e5928435e8120faa390.jpg_200x200q80.avif"},
+                   {name:"Alkaline Batteries", desc:"5-Year Shelf Life - for Smoke/CO Detector, Electronics & Audio",img:"https://www.tjmart.pk/image/cache/catalog/products/Energizer%204+2%20AA%20Alkaline%20Batteries/5d6778d36a6e8_8888021206210-700x700.jpg"},
+                    {name:"Heater", desc:"Electric Heater With Safety Switch | Energy Saving | Foldable Heater",img:"https://www.padminiappliances.com/cdn/shop/files/HalogenHeater-Volcano.png?v=1704368806"},
+                     {name:"Writing Tablet Electronic", desc:"Digital Memo Pad Erasable Writing Board Learning Toys And Gadgets For Educational ",img:"https://img.drz.lazcdn.com/static/pk/p/6068f3be384b916e32a6146d97f6e386.jpg_200x200q80.avif"},
+                      {name:"Power Banks", desc:"Portable Power Banks Electronic Gadgets Fast Charging Models",img:"https://img.drz.lazcdn.com/static/pk/p/ce612c6f6832e03d4d55e9af9bba5ba9.png_200x200q80.avif"},
+                       {name:"Refrigerator", desc:"LinearCooling™ keeps food fresh for longer",img:"https://img.drz.lazcdn.com/static/pk/p/5281b36e14907884f0ab88d83f1f8bdf.jpg_200x200q80.avif"},
+                        {name:"Automatic Washing Machine", desc:"Washing Capacity: 12 KG – ideal for large families",img:"https://img.drz.lazcdn.com/static/pk/p/c9baa65d9ee263b44a011d1615f748e5.png_200x200q80.avif"},
+                         {name:"Large Electric Gas Oven", desc:" for Bread Baking Equipment Baking Oven,perfect for baking, grilling, and roasting.",img:"https://image.made-in-china.com/202f0j00wlvbkSTzAcgi/Mini-and-Large-Electric-Gas-Oven-for-Bread-Baking-Equipment-Baking-Oven.webp"},
+                          {name:"Digital bench balance", desc:"Analytical Electronic Balance Lab Scale",img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwX9lDEWKQO56SdZoNaHktcNe5TMi8LG_Klg&s"},
+                           {name:"Digital Locker", desc:"Digital Locker is a secure online storage solution designed to keep your important documents safe.",img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsB5htVNL5iPup5b7jbjHNljr3FK5KkTYLsw&s"},
+
+  
+];
+// RENDER PRODUCTS WITHOUT BUY NOW
+const productList = document.getElementById("productList");
+products.forEach(p=>{
+  const col = document.createElement("div");
+  col.className = "col-md-4 product-box";
+  col.setAttribute("data-name", p.name.toLowerCase());
+  col.innerHTML = `
+    <div class="product-card">
+      <img src="${p.img}" alt="${p.name}">
+      <h5>${p.name}</h5>
+      <p>${p.desc}</p>
+      <div class="action-btns">
+        <button class="addCart">Add to Cart</button>
+      </div>
+    </div>
+  `;
+  productList.appendChild(col);
+});
+
+// CART COUNT
+let cartCount = 0;
+if(localStorage.getItem("cartItems")){
+  cartCount = JSON.parse(localStorage.getItem("cartItems")).length;
+  document.getElementById("cartCount").innerText = cartCount;
+}
+
+// SEARCH FUNCTION
+document.getElementById("searchInput").addEventListener("keyup", function(){
+  let val = this.value.toLowerCase();
+  document.querySelectorAll(".product-box").forEach(item => {
+    let name = item.getAttribute("data-name");
+    item.style.display = name.includes(val) ? "block" : "none";
+  });
+});
+document.getElementById("searchBtn").addEventListener("click", function(){
+  const val = document.getElementById("searchInput").value.toLowerCase();
+  document.querySelectorAll(".product-box").forEach(item => {
+    let name = item.getAttribute("data-name");
+    item.style.display = name.includes(val) ? "block" : "none";
+  });
+});
+
+// ADD TO CART
+document.addEventListener("click", function(e){
+  if(e.target && e.target.classList.contains("addCart")){
+    const productCard = e.target.closest(".product-card");
+    const name = productCard.querySelector("h5").innerText;
+    const desc = productCard.querySelector("p").innerText;
+    const img = productCard.querySelector("img").src;
+    let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+    cart.push({name, desc, img});
+    localStorage.setItem("cartItems", JSON.stringify(cart));
+    document.getElementById("cartCount").innerText = cart.length;
+    Swal.fire({ toast:true, icon:"success", title:"Added to Cart!", position:"top-end", timer:1500, showConfirmButton:false });
+  }
+});
+
+// FOOTER SUBSCRIBE
+document.querySelector(".footer-newsletter button").addEventListener("click", function(){
+  const email = this.previousElementSibling.value;
+  if(email){
+    Swal.fire({ icon:"success", title:"Subscribed!", text:`You subscribed with ${email}`, timer:2000, showConfirmButton:false });
+    this.previousElementSibling.value = "";
+  } else {
+    Swal.fire({ icon:"error", title:"Oops!", text:"Please enter a valid email." });
+  }
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+
+
